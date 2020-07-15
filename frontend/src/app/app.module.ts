@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
-import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
-// import { registerLocaleData } from '@angular/common';
-// import localeBr from '@angular/common/locales/pt';
-// registerLocaleData(localeBr);
+import '@angular/common/locales/global/pt';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -34,7 +32,7 @@ import { SharedModule } from './shared/shared.module';
     SharedModule.forRoot(),
   ],
   providers: [
-    // {provide: LOCALE_ID, useValue: 'pt'}
+    {provide: LOCALE_ID, useValue: 'pt-BR'}
   ],
   bootstrap: [AppComponent]
 })

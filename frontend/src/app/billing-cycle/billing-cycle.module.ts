@@ -8,7 +8,7 @@ import { BillingCycleService } from './billingCycle.service';
 const BILLING_CYCLE_ROUTES = [
     {path: '', component: ListComponent},
     {path: 'form', component: FormComponent},
-    {path: 'form/:id', compoent: FormComponent}
+    {path: 'form/:id', component: FormComponent}
 ]
 
 @NgModule({
