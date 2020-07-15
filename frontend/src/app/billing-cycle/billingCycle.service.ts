@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BillingCycle } from '../model/billingCycle.model';
 import { MEAN_API } from '../app.api';
@@ -17,5 +17,9 @@ export class BillingCycleService {
 
     all(): Observable<BillingCycle[]> {
         return this.httpClient.get<BillingCycle[]>(`${MEAN_API}/billingCycles`)
+    }
+
+    one(id: string): Observable<BillingCycle> {
+        return this.httpClient.get<BillingCycle>(`${MEAN_API}/billingCycles/${id}`)
     }
 }

@@ -19,9 +19,13 @@ export class ListComponent implements OnInit {
     this.billingCycles$ = this.billingCycleService.all()
   }
 
+  excluir(billingSelected: BillingCycle) {
+    console.log('Excluindo registro...', billingSelected)
+  }
+
   getUrl(billingCycle: BillingCycle):string {
     const id = billingCycle['_id']
-    return `billingCycles/form/${id}`
+    return `form/${id}`
   }
 
 }

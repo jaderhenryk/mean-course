@@ -15,7 +15,7 @@
                 <td>{{billingCycle.year}}</td>
                 <td class="table-actions">
                     <a [routerLink]="[getUrl(billingCycle)]" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-danger" (click)="excluir(billingCycle)"><i class="fa fa-trash-o"></i></button>
                 </td>
             </tr>
         </tbody>

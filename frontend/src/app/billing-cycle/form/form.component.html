@@ -1,5 +1,4 @@
 <form [formGroup]="formGroup" role="form" novalidate>
-    {{billingCycle | json}}
     <div class="box-body">
         <div class="col-xs-12 col-sm-4">
             <mean-input [label]="'Nome'" formGroupName="billingForm" [type]="'text'" [id]="'name'" [placeholder]="'Informe o nome'"></mean-input>
@@ -12,9 +11,10 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" (click)="incluir(formGroup.value)" [disabled]="!formGroup.valid">Incluir</button>
-        <button type="button" class="btn btn-info" (click)="alterar()">Alterar</button>
-        <button type="button" class="btn btn-danger" (click)="excluir()">Excluir</button>
-        <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+        <button type="button" class="btn btn-info" *ngIf="hasData; else newData" (click)="alterar(formGroup.value)" [disabled]="!formGroup.valid">Salvar</button>
+        <ng-template #newData>
+            <button type="button" class="btn btn-primary" (click)="incluir(formGroup.value)" [disabled]="!formGroup.valid">Salvar</button>
+        </ng-template>
+        <a [routerLink]="['/billingCycles']" class="btn btn-default">Cancelar</a>
     </div>
 </form>
