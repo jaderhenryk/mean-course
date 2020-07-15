@@ -1,0 +1,44 @@
+{
+  "name": "mean-course",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~10.0.3",
+    "@angular/common": "~10.0.3",
+    "@angular/compiler": "~10.0.3",
+    "@angular/core": "~10.0.3",
+    "@angular/forms": "~10.0.3",
+    "@angular/platform-browser": "~10.0.3",
+    "@angular/platform-browser-dynamic": "~10.0.3",
+    "@angular/router": "~10.0.3",
+    "admin-lte": "^2.4.18",
+    "core-js": "^3.6.5",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "ngx-toastr": "^12.1.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1000.1",
+    "@angular/cli": "^10.0.1",
+    "@angular/compiler-cli": "~10.0.3",
+    "@angular/language-service": "~10.0.3",
+    "@types/node": "~14.0.20",
+    "gulp": "^4.0.2",
+    "gulp-watch": "^5.0.1",
+    "gulp-webserver": "^0.9.1",
+    "ts-node": "~8.10.2",
+    "tslint": "~6.1.2",
+    "typescript": "~3.9.6"
+  }
+}

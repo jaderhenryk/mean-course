@@ -1,0 +1,6 @@
+<mean-content-header [title]="'Dashboard'" [info]="'Versão 1.0'"></mean-content-header>
+<section class="content">
+    <mean-value-box [value]="billingSummary?.credit | currency: 'BRL' : 'symbol'" [text]="'Total de Créditos'" [background]="'bg-green-gradient'" [icon]="'fa fa-bank'"></mean-value-box>
+    <mean-value-box [value]="billingSummary?.debt | currency: 'BRL' : 'symbol'" [text]="'Total de Débitos'" [background]="'bg-red-gradient'" [icon]="'fa fa-credit-card'"></mean-value-box>
+    <mean-value-box [value]="billingSummary?.total | currency: 'BRL' : 'symbol'" [text]="'Total Consolidado'" [background]="'bg-blue-gradient'" [icon]="'fa fa-money'"></mean-value-box>
+</section>

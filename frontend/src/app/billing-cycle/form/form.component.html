@@ -1,0 +1,20 @@
+<form [formGroup]="formGroup" role="form" novalidate>
+    {{billingCycle | json}}
+    <div class="box-body">
+        <div class="col-xs-12 col-sm-4">
+            <mean-input [label]="'Nome'" formGroupName="billingForm" [type]="'text'" [id]="'name'" [placeholder]="'Informe o nome'"></mean-input>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <mean-input [label]="'Mês'" formGroupName="billingForm" [type]="'number'" [id]="'month'" [placeholder]="'Informe o mês'"></mean-input>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <mean-input [label]="'Ano'" formGroupName="billingForm" [type]="'number'" [id]="'year'" [placeholder]="'Informe o Ano'"></mean-input>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="button" class="btn btn-primary" (click)="incluir(formGroup.value)" [disabled]="!formGroup.valid">Incluir</button>
+        <button type="button" class="btn btn-info" (click)="alterar()">Alterar</button>
+        <button type="button" class="btn btn-danger" (click)="excluir()">Excluir</button>
+        <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+    </div>
+</form>

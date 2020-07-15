@@ -1,0 +1,26 @@
+<div class="box-body table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Mês</th>
+                <th>Ano</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="billingCycles$ | async as billingCycles">
+            <tr *ngFor="let billingCycle of billingCycles">
+                <td>{{billingCycle.name}}</td>
+                <td>{{billingCycle.month}}</td>
+                <td>{{billingCycle.year}}</td>
+                <td class="table-actions">
+                    <a [routerLink]="[getUrl(billingCycle)]" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="box-footer">
+    <a [routerLink]="['/billingCycles/form']" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;Novo</a>
+</div>
