@@ -49,18 +49,16 @@ export class FormComponent implements OnInit {
     let billingCycle = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
     this.billingCycleService.create(billingCycle)
       .subscribe(
-        response => this.notifier.successMessage('Novo registro criado com sucesso!'),
+        () => {
+          this.notifier.successMessage('Novo registro criado com sucesso!')
+          this.formGroup.reset()
+        },
         httpError => this.handleError(httpError)
       )
-    // this.clearFields()
   }
 
   alterar(formData: any) {
     console.log('Alterando registro...', formData)
-  }
-
-  clearFields() {
-
   }
 
   private handleError(httpError: HttpErrorResponse) {
