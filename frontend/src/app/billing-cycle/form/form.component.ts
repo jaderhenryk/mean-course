@@ -58,7 +58,13 @@ export class FormComponent implements OnInit {
   }
 
   alterar(formData: any) {
-    console.log('Alterando registro...', formData)
+    let billingCycle = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
+    billingCycle['_id'] = this.route.snapshot.params['id']
+    this.billingCycleService.update(billingCycle)
+      .subscribe(
+        () => this.notifier.successMessage('Registro atualizado com sucesso!'),
+        httpError => this.handleError(httpError)
+      )
   }
 
   private handleError(httpError: HttpErrorResponse) {

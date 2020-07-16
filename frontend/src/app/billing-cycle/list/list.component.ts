@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BillingCycle } from 'src/app/model/billingCycle.model';
 import { BillingCycleService } from '../billingCycle.service';
 import { Observable } from 'rxjs';
-import { MEAN_API } from 'src/app/app.api';
+import { NotifierService } from 'src/app/shared/notifier/notifier.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'mean-list',
@@ -13,19 +14,36 @@ export class ListComponent implements OnInit {
 
   billingCycles$: Observable<BillingCycle[]>
 
-  constructor(private billingCycleService: BillingCycleService) { }
+  constructor(private billingCycleService: BillingCycleService, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.billingCycles$ = this.billingCycleService.all()
   }
 
   excluir(billingSelected: BillingCycle) {
-    console.log('Excluindo registro...', billingSelected)
+    const id = billingSelected['_id']
+    this.billingCycleService.delete(id)
+      .subscribe(
+        () => {
+          this.notifier.successMessage('Registro removido com sucesso!')
+          this.billingCycles$ = this.billingCycleService.all()
+        },
+        httpError => this.handleError(httpError)
+      )
   }
 
   getUrl(billingCycle: BillingCycle):string {
     const id = billingCycle['_id']
     return `form/${id}`
+  }
+
+  private handleError(httpError: HttpErrorResponse) {
+    const errors = httpError.error.errors
+    if (errors) {
+      errors.forEach( err => this.notifier.errorMessage(err) )
+    } else {
+      this.notifier.errorMessage(httpError.error.message)
+    }
   }
 
 }
