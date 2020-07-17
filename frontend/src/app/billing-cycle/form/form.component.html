@@ -9,6 +9,14 @@
         <div class="col-xs-12 col-sm-4">
             <mean-input [label]="'Ano'" formGroupName="billingForm" [type]="'number'" [id]="'year'" [placeholder]="'Informe o Ano'"></mean-input>
         </div>
+        <div class="col-xs-12 col-sm-6">
+            <legend>Créditos</legend>
+            <mean-credit-list [credits]="billingCycle?.credits"></mean-credit-list>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <legend>Débitos</legend>
+            <mean-debt-list [debts]="billingCycle?.debts"></mean-debt-list>
+        </div>
     </div>
     <div class="box-footer">
         <button type="button" class="btn btn-info" *ngIf="hasData; else newData" (click)="alterar(formGroup.value)" [disabled]="!formGroup.valid">Salvar</button>

@@ -24,9 +24,19 @@ export class FormComponent implements OnInit {
 
   numberPattern = /^[0-9]*$/
 
+  billingCycle: BillingCycle
+
   hasData = false
 
   ngOnInit() {
+    /*
+      gambiarra para não ter que passar o billingCycle como observable 
+      para as listas de créditos e débitos
+    */  
+    this.billingCycle = new BillingCycle('', 0, 0)
+    this.billingCycle.credits = [{}]
+    this.billingCycle.debts = [{}]
+
     this.formGroup = this.formBuilder.group({
       billingForm: this.formBuilder.group({
         name: new FormControl('', {validators: [Validators.required, Validators.minLength(3)]}),
@@ -40,6 +50,13 @@ export class FormComponent implements OnInit {
         this.formGroup.get('billingForm').get('name').setValue(bill.name)
         this.formGroup.get('billingForm').get('month').setValue(bill.month)
         this.formGroup.get('billingForm').get('year').setValue(bill.year)
+        this.billingCycle = bill
+        if (this.billingCycle.credits.length === 0) {
+          this.billingCycle.credits.push({})
+        }
+        if (this.billingCycle.debts.length === 0) {
+          this.billingCycle.debts.push({})
+        }
       })
       this.hasData = true
     }

@@ -4,6 +4,9 @@ import { FormComponent } from './form/form.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BillingCycleService } from './billingCycle.service';
+import { CreditListComponent } from './credit-list/credit-list.component';
+import { DebtListComponent } from './debt-list/debt-list.component';
+
 
 const BILLING_CYCLE_ROUTES = [
     {path: '', component: ListComponent},
@@ -12,7 +15,7 @@ const BILLING_CYCLE_ROUTES = [
 ]
 
 @NgModule({
-    declarations: [ ListComponent, FormComponent ],
+    declarations: [ ListComponent, FormComponent, CreditListComponent, DebtListComponent ],
     imports: [ SharedModule, RouterModule.forChild(BILLING_CYCLE_ROUTES) ],
     providers: [BillingCycleService]
 })

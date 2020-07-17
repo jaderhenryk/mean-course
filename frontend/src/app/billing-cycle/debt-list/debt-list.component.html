@@ -1,0 +1,30 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+                <!-- <th>Status</th> -->
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let debt of debts">
+                <td>
+                    <input type="text" class="form-control" [ngModel]="debt.name"/>
+                </td>
+                <td>
+                    <input type="number" class="form-control" [ngModel]="debt.value"/>
+                </td>
+                <!-- <td>
+                    <select class="form-control"></select>
+                </td> -->
+                <td class="table-actions">
+                    <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-warning"><i class="fa fa-copy"></i></button>
+                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
