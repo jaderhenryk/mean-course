@@ -17,4 +17,16 @@ export class DebtListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  incluir(index) {
+    this.debts.splice(index + 1, 0, {})
+  }
+
+  clonar(index, data) {
+    this.debts.splice(index + 1, 0, data)
+  }
+
+  excluir(index) {
+    this.debts.splice(index, 1)
+  }
+
 }

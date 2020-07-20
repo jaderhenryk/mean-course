@@ -9,22 +9,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let debt of debts">
+            <tr *ngFor="let debt of debts; index as idx">
                 <td>
-                    <input type="text" class="form-control" [ngModel]="debt.name"/>
+                    <input type="text" class="form-control" [(ngModel)]="debt.name"/>
                 </td>
                 <td>
-                    <input type="number" class="form-control" [ngModel]="debt.value"/>
+                    <input type="number" class="form-control" [(ngModel)]="debt.value"/>
                 </td>
                 <td>
-                    <select class="form-control" [ngModel]="debt.status">
+                    <select class="form-control" [(ngModel)]="debt.status">
                         <option *ngFor="let sts of status" [value]="sts">{{sts}}</option>
                     </select>
                 </td>
                 <td class="table-actions">
-                    <button class="btn btn-success"><i class="fa fa-plus"></i></button>
-                    <button class="btn btn-warning"><i class="fa fa-copy"></i></button>
-                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-success" (click)="incluir(idx)"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-warning" (click)="clonar(idx, debt)"><i class="fa fa-copy"></i></button>
+                    <button class="btn btn-danger" (click)="excluir(idx)" [disabled]="debts.length == 1"><i class="fa fa-trash-o"></i></button>
                 </td>
             </tr>
         </tbody>

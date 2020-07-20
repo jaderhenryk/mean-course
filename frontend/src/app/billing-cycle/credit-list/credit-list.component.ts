@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'mean-credit-list',
@@ -13,5 +13,17 @@ export class CreditListComponent implements OnInit {
   credits: any[]
 
   ngOnInit(): void {
+  }
+
+  incluir(index) {
+    this.credits.splice(index + 1, 0, {})
+  }
+
+  clonar(index, data) {
+    this.credits.splice(index + 1, 0, data)
+  }
+
+  excluir(index) {
+    this.credits.splice(index, 1)
   }
 }
