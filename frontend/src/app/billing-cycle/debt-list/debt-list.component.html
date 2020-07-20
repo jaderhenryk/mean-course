@@ -4,7 +4,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Valor</th>
-                <!-- <th>Status</th> -->
+                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -16,9 +16,11 @@
                 <td>
                     <input type="number" class="form-control" [ngModel]="debt.value"/>
                 </td>
-                <!-- <td>
-                    <select class="form-control"></select>
-                </td> -->
+                <td>
+                    <select class="form-control" [ngModel]="debt.status">
+                        <option *ngFor="let sts of status" [value]="sts">{{sts}}</option>
+                    </select>
+                </td>
                 <td class="table-actions">
                     <button class="btn btn-success"><i class="fa fa-plus"></i></button>
                     <button class="btn btn-warning"><i class="fa fa-copy"></i></button>

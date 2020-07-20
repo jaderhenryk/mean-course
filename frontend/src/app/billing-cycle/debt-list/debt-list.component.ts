@@ -12,6 +12,8 @@ export class DebtListComponent implements OnInit {
   @Input()
   debts: any[]
 
+  status: any[] = ['PAGO', 'PENDENTE', 'AGENDADO']
+
   ngOnInit(): void {
   }
 
