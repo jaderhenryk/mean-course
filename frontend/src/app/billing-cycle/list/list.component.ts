@@ -4,6 +4,7 @@ import { BillingCycleService } from '../billingCycle.service';
 import { Observable } from 'rxjs';
 import { NotifierService } from 'src/app/shared/notifier/notifier.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'mean-list',
@@ -12,12 +13,23 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ListComponent implements OnInit {
 
+  ROOT_URL = 'billingCycles'
+
   billingCycles$: Observable<BillingCycle[]>
 
-  constructor(private billingCycleService: BillingCycleService, private notifier: NotifierService) { }
+  pages$: Observable<number>
+
+  constructor(
+    private billingCycleService: BillingCycleService, 
+    private notifier: NotifierService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.billingCycles$ = this.billingCycleService.all()
+    let page = this.route.snapshot.queryParams['page'] || 1
+    page = (page - 1) * 10
+    this.billingCycles$ = this.billingCycleService.all(1)
+    this.pages$ = this.billingCycleService.count()
   }
 
   excluir(billingSelected: BillingCycle) {
@@ -35,6 +47,16 @@ export class ListComponent implements OnInit {
   getUrl(billingCycle: BillingCycle):string {
     const id = billingCycle['_id']
     return `form/${id}`
+  }
+
+  pageChange(page:number) {
+    let pg = page || 1
+    pg = (pg - 1) * 10
+    this.billingCycles$ = this.billingCycleService.all(pg)
+  }
+
+  getTotalPages(totalPages: number) {
+    return Math.ceil(totalPages / 10)
   }
 
   private handleError(httpError: HttpErrorResponse) {

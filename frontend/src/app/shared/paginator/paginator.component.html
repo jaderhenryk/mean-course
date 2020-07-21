@@ -1,0 +1,11 @@
+<ul class="pagination pagination-sm no-margin">
+    <li class="paginate_button previous" *ngIf="hasPrev">
+        <a type="button" (click)="prev()">Anterior</a>
+    </li>
+    <li class="paginate_button" *ngFor="let idx of pagesArray" [class.active]="isCurrent(idx)">
+        <a type="button" (click)="goToPage(idx)">{{idx}}</a>
+    </li>
+    <li class="paginate_button" *ngIf="hasNext">
+        <a type="button" (click)="next()">Próximo</a>
+    </li>
+</ul>

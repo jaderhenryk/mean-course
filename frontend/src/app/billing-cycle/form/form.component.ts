@@ -4,7 +4,7 @@ import { BillingCycleService } from '../billingCycle.service';
 import { BillingCycle } from 'src/app/model/billingCycle.model';
 import { NotifierService } from 'src/app/shared/notifier/notifier.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'mean-form',
@@ -17,7 +17,8 @@ export class FormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private notifier: NotifierService,
     private billingCycleService: BillingCycleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   formGroup: FormGroup
@@ -84,10 +85,11 @@ export class FormComponent implements OnInit {
       .subscribe(
         () => {
           this.notifier.successMessage('Novo registro criado com sucesso!')
-          this.formGroup.reset()
-          this.billingCycle.credits = [{name: '', value: 0}]
-          this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
-          this.refreshTotals()
+          // this.formGroup.reset()
+          // this.billingCycle.credits = [{name: '', value: 0}]
+          // this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
+          // this.refreshTotals()
+          this.router.navigate(['/billingCycles'])
         },
         httpError => this.handleError(httpError)
       )
@@ -100,7 +102,10 @@ export class FormComponent implements OnInit {
     updatedBilling['_id'] = this.route.snapshot.params['id']
     this.billingCycleService.update(updatedBilling)
       .subscribe(
-        () => this.notifier.successMessage('Registro atualizado com sucesso!'),
+        () => {
+          this.notifier.successMessage('Registro atualizado com sucesso!')
+          this.router.navigate(['/billingCycles'])
+        },
         httpError => this.handleError(httpError)
       )
   }

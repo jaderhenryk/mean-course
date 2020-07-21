@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BillingCycle } from '../model/billingCycle.model';
 import { MEAN_API } from '../app.api';
@@ -17,8 +17,16 @@ export class BillingCycleService {
         return this.httpClient.post<BillingCycle>(`${MEAN_API}/${this.ROOT_URL}`, billingCycle).pipe(map(b => b['_id']))
     }
 
-    all(): Observable<BillingCycle[]> {
-        return this.httpClient.get<BillingCycle[]>(`${MEAN_API}/${this.ROOT_URL}`)
+    all(page?: number): Observable<BillingCycle[]> {
+        let params: HttpParams
+        if (page !== undefined) {
+            params = new HttpParams().set('skip', page.toString()).set('limit', '10')
+        }
+        return this.httpClient.get<BillingCycle[]>(`${MEAN_API}/${this.ROOT_URL}`, {params})
+    }
+
+    count():Observable<number> {
+        return this.httpClient.get<number>(`${MEAN_API}/${this.ROOT_URL}/count`)
     }
 
     one(id: string): Observable<BillingCycle> {

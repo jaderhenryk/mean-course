@@ -21,6 +21,7 @@
         </tbody>
     </table>
 </div>
-<div class="box-footer">
+<div class="box-footer" *ngIf="pages$ | async as pages">
+    <mean-paginator (onPageChange)="pageChange($event)" [url]="ROOT_URL" [totalPages]="getTotalPages(pages['value'])"></mean-paginator>
     <a [routerLink]="['/billingCycles/form']" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>&nbsp;Novo</a>
 </div>

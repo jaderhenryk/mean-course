@@ -7,11 +7,13 @@ import { ContentHeaderComponent } from './content-header/content-header.componen
 import { InputComponent } from './input/input.component';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { NotifierService } from './notifier/notifier.service';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, ToastrModule.forRoot() ],
-    declarations: [ ContentHeaderComponent, ValueBoxComponent, InputComponent ],
-    exports: [ CommonModule, FormsModule, ReactiveFormsModule, ToastrModule, ContentHeaderComponent, ValueBoxComponent, InputComponent ]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, ToastrModule.forRoot() ],
+    declarations: [ ContentHeaderComponent, ValueBoxComponent, InputComponent, PaginatorComponent ],
+    exports: [ CommonModule, FormsModule, ReactiveFormsModule, ToastrModule, ContentHeaderComponent, ValueBoxComponent, InputComponent, PaginatorComponent ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders<SharedModule> {
