@@ -71,21 +71,34 @@ export class FormComponent implements OnInit {
   }
 
   incluir(formData: any) {
-    let billingCycle = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
-    this.billingCycleService.create(billingCycle)
+    let newBilling = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
+    let newCredits = this.validateCreditsDebts(this.billingCycle.credits)
+    if (newCredits.length > 0) {
+      newBilling.credits = newCredits
+    }
+    let newDebts = this.validateCreditsDebts(this.billingCycle.debts)
+    if (newDebts.length > 0) {
+      newBilling.debts = newDebts
+    }
+    this.billingCycleService.create(newBilling)
       .subscribe(
         () => {
           this.notifier.successMessage('Novo registro criado com sucesso!')
           this.formGroup.reset()
+          this.billingCycle.credits = [{name: '', value: 0}]
+          this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
+          this.refreshTotals()
         },
         httpError => this.handleError(httpError)
       )
   }
 
   alterar(formData: any) {
-    let billingCycle = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
-    billingCycle['_id'] = this.route.snapshot.params['id']
-    this.billingCycleService.update(billingCycle)
+    let updatedBilling = new BillingCycle(formData.billingForm.name, formData.billingForm.month, formData.billingForm.year)
+    updatedBilling.credits = this.validateCreditsDebts(this.billingCycle.credits)
+    updatedBilling.debts = this.validateCreditsDebts(this.billingCycle.debts)
+    updatedBilling['_id'] = this.route.snapshot.params['id']
+    this.billingCycleService.update(updatedBilling)
       .subscribe(
         () => this.notifier.successMessage('Registro atualizado com sucesso!'),
         httpError => this.handleError(httpError)
@@ -104,12 +117,38 @@ export class FormComponent implements OnInit {
   getTotalCredit(): number {
     let total = 0
     total = this.billingCycle.credits.map(credit => credit.value).reduce((prev, value) => prev + value, 0)
-    return total
+    return isNaN(total) ? 0 : parseFloat(total.toFixed(2))
   }
 
   getTotalDebt(): number {
     let total = 0
     total = this.billingCycle.debts.map(debt => debt.value).reduce((prev, value) => prev + value, 0)
-    return total
+    return isNaN(total) ? 0 : parseFloat(total.toFixed(2))
+  }
+
+  updateCredits(updatedCredits) {
+    this.billingCycle.credits = updatedCredits
+    this.refreshTotals()
+  }
+
+  updateDebts(updatedDebts) {
+    this.billingCycle.debts = updatedDebts
+    this.refreshTotals()
+  }
+
+  refreshTotals() {
+    this.totalCredit = this.getTotalCredit()
+    this.totalDebt = this.getTotalDebt()
+    this.totalConsolidado = this.totalCredit - this.totalDebt
+  }
+
+  validateCreditsDebts(data: any[]) {
+    let newData = []
+    data.forEach((item) => {
+      if (item && item.name && item.name !== '' && item.value) {
+        newData.push(item)
+      }
+    })
+    return newData
   }
 }

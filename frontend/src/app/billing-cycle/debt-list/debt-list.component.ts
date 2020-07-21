@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'mean-debt-list',
@@ -12,21 +12,31 @@ export class DebtListComponent implements OnInit {
   @Input()
   debts: any[]
 
+  @Output()
+  onUpdateDebts = new EventEmitter<any[]>()
+
   status: any[] = ['PAGO', 'PENDENTE', 'AGENDADO']
 
   ngOnInit(): void {
   }
 
   incluir(index) {
-    this.debts.splice(index + 1, 0, {})
+    this.debts.splice(index + 1, 0, {name: '', value: 0, status: 'PENDENTE'})
+    this.onUpdateDebts.emit(this.debts)
   }
 
   clonar(index, data) {
-    this.debts.splice(index + 1, 0, data)
+    this.debts.splice(index + 1, 0, {name: data.name, value: data.value, status: data.status})
+    this.onUpdateDebts.emit(this.debts)
   }
 
   excluir(index) {
     this.debts.splice(index, 1)
+    this.onUpdateDebts.emit(this.debts)
+  }
+
+  updateDebt() {
+    this.onUpdateDebts.emit(this.debts)
   }
 
 }

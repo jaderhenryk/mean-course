@@ -19,11 +19,11 @@
         </div>
         <div class="col-xs-12 col-sm-6">
             <legend>Créditos</legend>
-            <mean-credit-list [credits]="billingCycle?.credits"></mean-credit-list>
+            <mean-credit-list (onUpdateCredits)="updateCredits($event)" [credits]="billingCycle?.credits"></mean-credit-list>
         </div>
         <div class="col-xs-12 col-sm-6">
             <legend>Débitos</legend>
-            <mean-debt-list [debts]="billingCycle?.debts"></mean-debt-list>
+            <mean-debt-list (onUpdateDebts)="updateDebts($event)" [debts]="billingCycle?.debts"></mean-debt-list>
         </div>
     </div>
     <div class="box-footer">

@@ -10,10 +10,10 @@
         <tbody>
             <tr *ngFor="let credit of credits; index as idx">
                 <td>
-                    <input type="text" class="form-control" [(ngModel)]="credit.name"/>
+                    <input type="text" (change)="updateCredit()" class="form-control" [(ngModel)]="credit.name"/>
                 </td>
                 <td>
-                    <input type="number" class="form-control" [(ngModel)]="credit.value"/>
+                    <input type="number" (change)="updateCredit()" class="form-control" [(ngModel)]="credit.value"/>
                 </td>
                 <td class="table-actions">
                     <button class="btn btn-success" (click)="incluir(idx)"><i class="fa fa-plus"></i></button>

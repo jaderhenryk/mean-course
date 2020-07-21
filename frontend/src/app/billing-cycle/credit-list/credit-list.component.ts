@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'mean-credit-list',
@@ -12,18 +12,28 @@ export class CreditListComponent implements OnInit {
   @Input()
   credits: any[]
 
+  @Output()
+  onUpdateCredits = new EventEmitter<any[]>()
+
   ngOnInit(): void {
   }
 
   incluir(index) {
-    this.credits.splice(index + 1, 0, {})
+    this.credits.splice(index + 1, 0, {name: '', value: 0})
+    this.onUpdateCredits.emit(this.credits)
   }
 
   clonar(index, data) {
-    this.credits.splice(index + 1, 0, data)
+    this.credits.splice(index + 1, 0, {name: data.name, value: data.value})
+    this.onUpdateCredits.emit(this.credits)
   }
 
   excluir(index) {
     this.credits.splice(index, 1)
+    this.onUpdateCredits.emit(this.credits)
+  }
+
+  updateCredit() {
+    this.onUpdateCredits.emit(this.credits)
   }
 }
