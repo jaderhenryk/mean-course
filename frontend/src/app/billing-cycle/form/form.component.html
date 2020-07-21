@@ -9,6 +9,14 @@
         <div class="col-xs-12 col-sm-4">
             <mean-input [label]="'Ano'" formGroupName="billingForm" [type]="'number'" [id]="'year'" [placeholder]="'Informe o Ano'"></mean-input>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <legend>Resumo</legend>
+                <mean-value-box [value]="totalCredit | currency: 'BRL' : 'symbol'" [text]="'Total de Créditos'" [background]="'bg-green-gradient'" [icon]="'fa fa-bank'"></mean-value-box>
+                <mean-value-box [value]="totalDebt | currency: 'BRL' : 'symbol'" [text]="'Total de Débitos'" [background]="'bg-red-gradient'" [icon]="'fa fa-credit-card'"></mean-value-box>
+                <mean-value-box [value]="totalConsolidado | currency: 'BRL' : 'symbol'" [text]="'Total Consolidado'" [background]="'bg-blue-gradient'" [icon]="'fa fa-money'"></mean-value-box>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-6">
             <legend>Créditos</legend>
             <mean-credit-list [credits]="billingCycle?.credits"></mean-credit-list>

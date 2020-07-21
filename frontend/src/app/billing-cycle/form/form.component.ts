@@ -25,6 +25,9 @@ export class FormComponent implements OnInit {
   numberPattern = /^[0-9]*$/
 
   billingCycle: BillingCycle
+  totalCredit: number = 0
+  totalDebt: number = 0
+  totalConsolidado: number = 0
 
   hasData = false
 
@@ -34,8 +37,8 @@ export class FormComponent implements OnInit {
       para as listas de créditos e débitos
     */  
     this.billingCycle = new BillingCycle('', 0, 0)
-    this.billingCycle.credits = [{}]
-    this.billingCycle.debts = [{}]
+    this.billingCycle.credits = [{name: '', value: 0}]
+    this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
 
     this.formGroup = this.formBuilder.group({
       billingForm: this.formBuilder.group({
@@ -52,11 +55,16 @@ export class FormComponent implements OnInit {
         this.formGroup.get('billingForm').get('year').setValue(bill.year)
         this.billingCycle = bill
         if (this.billingCycle.credits.length === 0) {
-          this.billingCycle.credits.push({})
+          this.billingCycle.credits.push({name: '', value: 0})
+        } else {
+          this.totalCredit = this.getTotalCredit()
         }
         if (this.billingCycle.debts.length === 0) {
-          this.billingCycle.debts.push({})
+          this.billingCycle.debts.push({name: '', value: 0, status: 'PENDENTE'})
+        } else {
+          this.totalDebt = this.getTotalDebt()
         }
+        this.totalConsolidado = this.totalCredit - this.totalDebt
       })
       this.hasData = true
     }
@@ -91,5 +99,17 @@ export class FormComponent implements OnInit {
     } else {
       this.notifier.errorMessage(httpError.error.message)
     }
+  }
+
+  getTotalCredit(): number {
+    let total = 0
+    total = this.billingCycle.credits.map(credit => credit.value).reduce((prev, value) => prev + value, 0)
+    return total
+  }
+
+  getTotalDebt(): number {
+    let total = 0
+    total = this.billingCycle.debts.map(debt => debt.value).reduce((prev, value) => prev + value, 0)
+    return total
   }
 }
