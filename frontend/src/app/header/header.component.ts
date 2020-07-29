@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../security/user/user.service';
 
 @Component({
   selector: 'mean-header',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+  }
+
+  getUser() {
+    return {name: 'Jader Henryk', email: 'jaderhenryk@gmail.com'};
+  }
+
+  login() {
+    console.log('Holá!!!');
+  }
+
+  logout() {
+    console.log('Au revoir!!!');
   }
 
 }

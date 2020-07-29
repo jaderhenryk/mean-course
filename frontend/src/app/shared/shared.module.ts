@@ -9,6 +9,7 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { NotifierService } from './notifier/notifier.service';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../security/user/user.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, ToastrModule.forRoot() ],
@@ -21,7 +22,8 @@ export class SharedModule {
            ngModule: SharedModule,
            providers: [
                DashboardService,
-               NotifierService
+               NotifierService,
+               UserService
            ]
        }
     }
