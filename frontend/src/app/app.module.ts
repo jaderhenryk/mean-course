@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app.routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BillingCycleComponent } from './billing-cycle/billing-cycle.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './security/auth/auth.module';
+import { LayoutComponent } from './layout/layout.component';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent,
     FooterComponent,
     DashboardComponent,
-    BillingCycleComponent
+    BillingCycleComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     AppRoutingModule,
     SharedModule.forRoot(),
+    AuthModule.forRoot()
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'}
