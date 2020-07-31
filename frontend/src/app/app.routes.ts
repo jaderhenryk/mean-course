@@ -28,7 +28,7 @@ export const ROUTES = [
         path: 'auth',
         component: AuthComponent,
         children: [
-            {path: 'auth', redirectTo: 'login', pathMatch: 'full'},
+            {path: '', redirectTo: 'login', pathMatch: 'full'},
             {
                 path: '',
                 loadChildren: () => import('./security/auth/auth.module').then(m => m.AuthModule)

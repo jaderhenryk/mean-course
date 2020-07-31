@@ -31,10 +31,14 @@ export class RegisterComponent implements OnInit {
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern(this.passwordRegex)]),
-      passwordConfirmation: this.formBuilder.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern(this.passwordRegex)])
+      passwordConfirmation: this.formBuilder.control('', [
+        Validators.required, 
+        Validators.minLength(6), 
+        Validators.maxLength(12), 
+        Validators.pattern(this.passwordRegex),
+      ])
     }, {
-      validators: [RegisterComponent.equalsTo],
-      updateOn: 'blur'
+      validators: [RegisterComponent.equalsTo]
     })
   }
 

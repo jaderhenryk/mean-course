@@ -1,7 +1,7 @@
 <p class="login-box-msg">Entre com seus dados</p>
-<form role="form">
+<form [formGroup]="formGroup" role="form">
     <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="e-mail">
+        <input type="email" class="form-control" formControlName="email" placeholder="e-mail">
         <span class="fa fa-envelope form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
@@ -10,8 +10,8 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <button type="button" class="btn btn-primary btn-block btn-flat">Entrar</button>
+            <button type="button" class="btn btn-primary btn-block btn-flat" [disabled]="!formGroup.valid">Entrar</button>
         </div>
     </div>
 </form>
-<a [routerLink]="['/auth/signup']" class="text-center">Criar Conta</a>
+<a [routerLink]="['/auth/signup']" class="text-center">Não possui conta? Cadastre-se</a>
