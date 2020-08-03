@@ -27,7 +27,6 @@ const login = (req, res, next) => {
             const { name, email } = user
             res.json({ name, email, token })
         } else {
-            console.log(JSON.stringify(user))
             return res.status(400).send({ errors: ['Usuário/Senha inválidos'] })
         }
     })

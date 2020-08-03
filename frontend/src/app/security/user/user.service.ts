@@ -8,18 +8,12 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class UserService {
 
-    // private userSubject: BehaviorSubject<User>
-    // user: Observable<User>
     user: User
 
-    constructor(private httpClient: HttpClient) {
-        // this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(MEAN_USER_KEY)))
-        // this.user = this.userSubject.asObservable() 
-    }
+    constructor(private httpClient: HttpClient) {}
 
     login(email: string, password: string): Observable<User> {
         return this.httpClient.post<User>(`${MEAN_OAPI}/login`, {email, password}).pipe(tap(user => {
-            // this.userSubject.next(user)
             this.user = user
             localStorage.setItem(MEAN_USER_KEY, JSON.stringify(user))
         }))
@@ -27,7 +21,6 @@ export class UserService {
 
     signup(newUser: any): Observable<User> {
         return this.httpClient.post<User>(`${MEAN_OAPI}/signup`, newUser).pipe(tap(user => {
-            // this.userSubject.next(user)
             this.user = user
             localStorage.setItem(MEAN_USER_KEY, JSON.stringify(user))
         }))
@@ -36,10 +29,5 @@ export class UserService {
     logout() {
         this.user = undefined
         localStorage.removeItem(MEAN_USER_KEY)
-        // this.userSubject.next(undefined)
     }
-
-    // getUser():User {
-        // return this.userSubject.value
-    // }
 }
