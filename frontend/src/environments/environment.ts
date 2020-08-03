@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  api_endpoint: 'http://localhost:3003/api'
+  api_endpoint: 'http://localhost:3003/api',
+  oapi_endpoint: 'http://localhost:3003/oapi',
+  userKey: '_mean_app_user'
 };
 
 /*

@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <button type="button" class="btn btn-primary btn-block btn-flat" [disabled]="!formGroup.valid">Cadastrar</button>
+            <button type="button" class="btn btn-primary btn-block btn-flat" (click)="signup(formGroup.value)" [disabled]="!formGroup.valid">Cadastrar</button>
         </div>
     </div>
 </form>

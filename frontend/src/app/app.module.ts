@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgModule, LOCALE_ID } from '@angular/core';
 
 import '@angular/common/locales/global/pt';
@@ -15,6 +15,7 @@ import { BillingCycleComponent } from './billing-cycle/billing-cycle.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './security/auth/auth.module';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthInterceptor } from './security/auth/auth.interceptor';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LayoutComponent } from './layout/layout.component';
     AuthModule.forRoot()
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-BR'}
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -5,12 +5,12 @@
         <span class="fa fa-envelope form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="senha">
+        <input type="password" class="form-control" formControlName="password" placeholder="senha">
         <span class="fa fa-lock form-control-feedback"></span>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <button type="button" class="btn btn-primary btn-block btn-flat" [disabled]="!formGroup.valid">Entrar</button>
+            <button type="button" class="btn btn-primary btn-block btn-flat" (click)="login(formGroup.value)" [disabled]="!formGroup.valid">Entrar</button>
         </div>
     </div>
 </form>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UserService } from '../../user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mean-register',
@@ -8,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   formGroup: FormGroup
 
@@ -40,6 +42,17 @@ export class RegisterComponent implements OnInit {
     }, {
       validators: [RegisterComponent.equalsTo]
     })
+  }
+
+  signup(formData: any) {
+    // J@d3r123
+    this.userService.signup(formData).subscribe(
+      user => {
+        console.log(`Olá ${user.name}`, user)
+        this.router.navigate([''])
+      },
+      error => console.log('Error ao tentar se cadastrar!!!', error)
+    )
   }
 
 }
