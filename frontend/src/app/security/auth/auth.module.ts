@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core'
 import { AuthComponent } from './auth.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { UserService } from '../user/user.service';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,14 +15,8 @@ const AUTH_ROUTES = [
     imports: [ 
         SharedModule,
         RouterModule.forChild(AUTH_ROUTES)
-    ],
-    providers: [ UserService ]
+    ]
 })
 export class AuthModule {
-    static forRoot(): ModuleWithProviders<AuthModule> {
-        return {
-            ngModule: AuthModule,
-            providers: [UserService]  
-        };
-    }
+    
 }

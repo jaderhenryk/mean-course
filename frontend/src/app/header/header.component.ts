@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../security/user/user.service';
 import { Router } from '@angular/router';
-import { User } from '../security/user/user.model';
 
 @Component({
   selector: 'mean-header',
@@ -10,17 +9,12 @@ import { User } from '../security/user/user.model';
 })
 export class HeaderComponent implements OnInit {
 
-  private user: User
+  constructor(private userService: UserService, private router: Router) {}
 
-  constructor(private userService: UserService, private router: Router) {
-    userService.user.subscribe(user => this.user = user)
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   getUser() {
-    return {name: this.user.name, email: this.user.email}
+    return this.userService.user
   }
 
   logout() {

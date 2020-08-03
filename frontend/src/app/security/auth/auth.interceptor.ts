@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { MEAN_API } from 'src/app/app.api';
@@ -7,10 +7,11 @@ import { MEAN_API } from 'src/app/app.api';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private userService: UserService) {}
+    constructor(private injector: Injector) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-        const user = this.userService.getUser()
+        const userService = this.injector.get(UserService)
+        const user = userService.user
         const isApiUrl = request.url.startsWith(MEAN_API)
         if (user && isApiUrl) {
             request = request.clone({

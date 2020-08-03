@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { Router } from '@angular/router';
+import { NotifierService } from 'src/app/shared/notifier/notifier.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'mean-register',
@@ -10,7 +12,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private userService: UserService, 
+    private router: Router,
+    private notifier: NotifierService) { }
 
   formGroup: FormGroup
 
@@ -47,12 +53,19 @@ export class RegisterComponent implements OnInit {
   signup(formData: any) {
     // J@d3r123
     this.userService.signup(formData).subscribe(
-      user => {
-        console.log(`Olá ${user.name}`, user)
-        this.router.navigate([''])
-      },
-      error => console.log('Error ao tentar se cadastrar!!!', error)
+      user => this.notifier.successMessage(`Olá ${user.name}`),
+      error => this.handleError(error),
+      () => this.router.navigate([''])
     )
+  }
+
+  private handleError(httpError: HttpErrorResponse) {
+    const errors = httpError.error.errors
+    if (errors) {
+      errors.forEach( err => this.notifier.errorMessage(err) )
+    } else {
+      this.notifier.errorMessage(httpError.error.message)
+    }
   }
 
 }

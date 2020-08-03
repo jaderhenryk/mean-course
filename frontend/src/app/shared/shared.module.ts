@@ -9,6 +9,9 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { NotifierService } from './notifier/notifier.service';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../security/auth/auth.interceptor';
+import { UserService } from '../security/user/user.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, ToastrModule.forRoot() ],
@@ -21,7 +24,9 @@ export class SharedModule {
            ngModule: SharedModule,
            providers: [
                DashboardService,
-               NotifierService
+               NotifierService,
+               UserService,
+               {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
            ]
        }
     }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { Router } from '@angular/router';
+import { NotifierService } from 'src/app/shared/notifier/notifier.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'mean-login',
@@ -12,7 +14,11 @@ export class LoginComponent implements OnInit {
 
   formGroup: FormGroup
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -23,12 +29,19 @@ export class LoginComponent implements OnInit {
 
   login(formData: any) {
     this.userService.login(formData.email, formData.password).subscribe(
-      user => {
-        console.log(`Olá ${user.name}`)
-        this.router.navigate([''])
-      },
-      error => console.log(error)
+      user => this.notifier.successMessage(`Olá ${user.name}`),
+      error => this.handleError(error),
+      () => this.router.navigate([''])
     )
+  }
+
+  private handleError(httpError: HttpErrorResponse) {
+    const errors = httpError.error.errors
+    if (errors) {
+      errors.forEach( err => this.notifier.errorMessage(err) )
+    } else {
+      this.notifier.errorMessage(httpError.error.message)
+    }
   }
 
 }
