@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../security/user/user.service';
 import { Router } from '@angular/router';
+import { UserService } from '../security/user/user.service';
 
 @Component({
   selector: 'mean-header',
@@ -14,13 +14,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {}
 
   getUser() {
-    return this.userService.user
+    return this.userService.getUser()
   }
 
   logout() {
     this.userService.logout()
-    console.log('Au revoir!!!');
-    this.router.navigate(['/auth/login'])
+    this.userService.handleLogin()
   }
 
 }

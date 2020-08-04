@@ -11,12 +11,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
         const userService = this.injector.get(UserService)
-        const user = userService.user
+        const user = userService.getUser()
         const isApiUrl = request.url.startsWith(MEAN_API)
         if (user && isApiUrl) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: user.token
+                    Authorization: user['token']
                 }
             })
         }

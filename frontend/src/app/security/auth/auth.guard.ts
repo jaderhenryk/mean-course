@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanLoad, Route, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserService } from '../user/user.service';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   checkAuthentication(path: string): boolean {
     const isLogged = this.userService.isLoggedIn()
     if (!isLogged) {
-      this.userService.handleLogin(`/${path}`)
+      this.userService.handleLogin()
     }
     return isLogged
   }

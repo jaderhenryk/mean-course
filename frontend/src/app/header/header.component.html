@@ -14,14 +14,14 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="../../assets/img/user.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{getUser().name}}</span>
+                        <span class="hidden-xs">{{getUser()['name']}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
                             <img src="../../assets/img/user.jpg" class="img-circle" alt="User Image">
                             <p>
-                                {{getUser().name}}
-                                <small>{{getUser().email}}</small>
+                                {{getUser()['name']}}
+                                <small>{{getUser()['email']}}</small>
                             </p>
                         </li>
                         <li class="user-footer">
