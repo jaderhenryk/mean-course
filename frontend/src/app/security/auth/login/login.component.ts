@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../user/user.service';
-import { Router } from '@angular/router';
-import { NotifierService } from 'src/app/shared/notifier/notifier.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { UserService } from '../../user/user.service';
+import { NotifierService } from '../../../shared/notifier/notifier.service';
 
 @Component({
   selector: 'mean-login',

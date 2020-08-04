@@ -12,19 +12,19 @@ export const ROUTES = [
         component: LayoutComponent,
         children: [
             { path: '',  redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent, canLoad: [AuthGuard], canActivate: [AuthGuard] },
+            { path: 'dashboard', component: DashboardComponent },
             { 
                 path: 'billingCycles', 
                 component: BillingCycleComponent,
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('./billing-cycle/billing-cycle.module').then(m => m.BillingCycleModule),
-                        canLoad: [AuthGuard], canActivate: [AuthGuard]
+                        loadChildren: () => import('./billing-cycle/billing-cycle.module').then(m => m.BillingCycleModule)
                     }
                 ]
             }, 
-        ]
+        ],
+        canLoad: [AuthGuard], canActivate: [AuthGuard]
     },
     {
         path: 'auth',

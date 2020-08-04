@@ -33,10 +33,6 @@ export class FormComponent implements OnInit {
   hasData = false
 
   ngOnInit() {
-    /*
-      gambiarra para não ter que passar o billingCycle como observable 
-      para as listas de créditos e débitos
-    */  
     this.billingCycle = new BillingCycle('', 0, 0)
     this.billingCycle.credits = [{name: '', value: 0}]
     this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
@@ -85,10 +81,6 @@ export class FormComponent implements OnInit {
       .subscribe(
         () => {
           this.notifier.successMessage('Novo registro criado com sucesso!')
-          // this.formGroup.reset()
-          // this.billingCycle.credits = [{name: '', value: 0}]
-          // this.billingCycle.debts = [{name: '', value: 0, status: 'PENDENTE'}]
-          // this.refreshTotals()
           this.router.navigate(['/billingCycles'])
         },
         httpError => this.handleError(httpError)

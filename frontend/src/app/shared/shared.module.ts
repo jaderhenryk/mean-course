@@ -2,14 +2,14 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ValueBoxComponent } from './value-box/value-box.component';
 import { ContentHeaderComponent } from './content-header/content-header.component';
 import { InputComponent } from './input/input.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { NotifierService } from './notifier/notifier.service';
-import { PaginatorComponent } from './paginator/paginator.component';
-import { RouterModule } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../security/auth/auth.interceptor';
 import { UserService } from '../security/user/user.service';
 import { AuthGuard } from '../security/auth/auth.guard';

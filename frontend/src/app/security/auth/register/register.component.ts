@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { UserService } from '../../user/user.service';
 import { Router } from '@angular/router';
-import { NotifierService } from 'src/app/shared/notifier/notifier.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../user/user.service';
+import { NotifierService } from '../../../shared/notifier/notifier.service';
 
 @Component({
   selector: 'mean-register',
@@ -51,7 +51,6 @@ export class RegisterComponent implements OnInit {
   }
 
   signup(formData: any) {
-    // J@d3r123
     this.userService.signup(formData).subscribe(
       user => this.notifier.successMessage(`Olá ${user.name}`),
       error => this.handleError(error),

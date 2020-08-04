@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BillingSummary } from '../model/billingSummary.model';
 import { DashboardService } from './dashboard.service';
 
@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardService.summary().subscribe(billingSummary => {
-      console.log(billingSummary)
       this.billingSummary = billingSummary
       this.billingSummary.total = this.billingSummary.credit - this.billingSummary.debt
     })
