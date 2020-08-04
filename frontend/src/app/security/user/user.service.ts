@@ -3,14 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Observable } from 'rxjs';
 import { MEAN_OAPI, MEAN_USER_KEY } from 'src/app/app.api';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable()
 export class UserService {
 
     user: User
+    previousUrl: string;
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private router: Router) {
+        this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((e: NavigationEnd) => this.previousUrl = e.url);
+    }
 
     login(email: string, password: string): Observable<User> {
         return this.httpClient.post<User>(`${MEAN_OAPI}/login`, {email, password}).pipe(tap(user => {
@@ -29,5 +33,13 @@ export class UserService {
     logout() {
         this.user = undefined
         localStorage.removeItem(MEAN_USER_KEY)
+    }
+
+    handleLogin(path: string = this.previousUrl) {
+        this.router.navigate(['/auth/login', path]);
+    }
+
+    isLoggedIn(): boolean {
+        return this.user !== undefined
     }
 }

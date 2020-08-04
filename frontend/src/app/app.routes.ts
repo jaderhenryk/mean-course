@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthComponent } from './security/auth/auth.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthGuard } from './security/auth/auth.guard';
 
 export const ROUTES = [
     {
@@ -11,14 +12,15 @@ export const ROUTES = [
         component: LayoutComponent,
         children: [
             { path: '',  redirectTo: 'dashboard', pathMatch: 'full' },
-            { path: 'dashboard', component: DashboardComponent },
+            { path: 'dashboard', component: DashboardComponent, canLoad: [AuthGuard], canActivate: [AuthGuard] },
             { 
                 path: 'billingCycles', 
                 component: BillingCycleComponent,
                 children: [
                     {
                         path: '',
-                        loadChildren: () => import('./billing-cycle/billing-cycle.module').then(m => m.BillingCycleModule)
+                        loadChildren: () => import('./billing-cycle/billing-cycle.module').then(m => m.BillingCycleModule),
+                        canLoad: [AuthGuard], canActivate: [AuthGuard]
                     }
                 ]
             }, 
